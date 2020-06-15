@@ -61,7 +61,10 @@ def detect_and_predict_mask(frame, faceNet, maskDetectorModel):
       try:
         face = frame[startY:endY, startX:endX]
         face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
-        face = cv2.resize(face, (imageSize, imageSize))
+        try:
+          face = cv2.resize(face, (imageSize, imageSize))
+        except Exception as e:
+          print(str(e))
         face = img_to_array(face)
         face = preprocess_input(face)
         face = np.expand_dims(face, axis=0)
@@ -108,6 +111,8 @@ vs = VideoStream(src=0).start()
 # Insert a 2 second buffer for initialization 
 time.sleep(2.0)
 
+i = 0
+
 # Loop over the frames for the camera stream
 while True:
 
@@ -115,18 +120,17 @@ while True:
   # Set maximum width of the frame to 600
   frame = vs.read()
   frame = imutils.resize(frame, width=600)
-
-  # detect faces in the frame and determine if they are wearing a
-  # face mask or not
-
+  
   # Call defined function to detect faces and
   # predict presence of mask
   (locations, predictions) = detect_and_predict_mask(frame, faceNet, maskDetectorModel)
 
+  i = i+1
+
   # Loop over the detected bounding boxes for the faces
   for (box, prediction) in zip(locations, predictions):
-    # unpack the bounding box and predictions
-
+    
+    print(i)
     # Assign bounding box dimensions
     (startX, startY, endX, endY) = box
 
@@ -135,6 +139,8 @@ while True:
 
     # Assign class label
     label = "With Mask" if withMask > withoutMask else "No Mask"
+
+    print(label)
 
     # Configure display text and color
     if label == "With Mask":
@@ -154,7 +160,7 @@ while True:
     cv2.rectangle(frame, (startX, startY), (endX, endY), color, 2)
 
   # Show display text and bounding box on the output window
-  cv2.imshow("Output", frame)
+  cv2.imshow("Face Mask Detector", frame)
   key = cv2.waitKey(1) & 0xFF
 
   # Exit on Esc key press

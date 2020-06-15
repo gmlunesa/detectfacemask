@@ -114,8 +114,8 @@ for i in range(0, detections.shape[2]):
     cv2.rectangle(image, (startX, startY), (endX, endY), color, 2)
 
 # Show display text and bounding box on the output window
-cv2.imshow("Output", image)
-cv2.namedWindow("Output", cv2.WINDOW_NORMAL)
-cv2.resizeWindow("Output", 600, 600)
+cv2.imshow("Face Mask Detector", image)
+cv2.namedWindow("Face Mask Detector", cv2.WINDOW_NORMAL)
+cv2.resizeWindow("Face Mask Detector", 600, 600)
 
 cv2.waitKey(0)
