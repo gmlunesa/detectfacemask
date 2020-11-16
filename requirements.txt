@@ -1,0 +1,17 @@
+astroid==2.4.2
+colorama==0.4.3
+h5py==2.10.0
+imutils==0.5.3
+isort==4.3.21
+Keras==2.3.1
+Keras-Applications==1.0.8
+Keras-Preprocessing==1.1.2
+lazy-object-proxy==1.4.3
+mccabe==0.6.1
+numpy==1.18.5
+pylint==2.5.3
+PyYAML==5.3.1
+scipy==1.4.1
+six==1.15.0
+toml==0.10.1
+wrapt==1.12.1
