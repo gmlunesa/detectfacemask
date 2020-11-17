@@ -120,7 +120,7 @@ while True:
   # Set maximum width of the frame to 600
   frame = vs.read()
   frame = imutils.resize(frame, width=600)
-  
+
   # Call defined function to detect faces and
   # predict presence of mask
   (locations, predictions) = detect_and_predict_mask(frame, faceNet, maskDetectorModel)
@@ -129,8 +129,7 @@ while True:
 
   # Loop over the detected bounding boxes for the faces
   for (box, prediction) in zip(locations, predictions):
-    
-    print(i)
+
     # Assign bounding box dimensions
     (startX, startY, endX, endY) = box
 
@@ -139,8 +138,6 @@ while True:
 
     # Assign class label
     label = "With Mask" if withMask > withoutMask else "No Mask"
-
-    print(label)
 
     # Configure display text and color
     if label == "With Mask":
